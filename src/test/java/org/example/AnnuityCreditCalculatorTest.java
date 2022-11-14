@@ -16,15 +16,15 @@ class AnnuityCreditCalculatorTest {
             * Math.pow((1 + PERCENTAGE_MONTH_RATE), NUMBER_OF_MONTH)
             / (Math.pow((1 + PERCENTAGE_MONTH_RATE), NUMBER_OF_MONTH) - 1)
     );
-    private static double MONTHLY_PAYMENT = ANNUITY_RATIO * CREDIT_AMOUNT;
-    private static double TOTAL_AMOUNT = MONTHLY_PAYMENT * NUMBER_OF_MONTH;
-    private static double TOTAL_OVERPAYMENT = TOTAL_AMOUNT - CREDIT_AMOUNT;
+    private static final double MONTHLY_PAYMENT = ANNUITY_RATIO * CREDIT_AMOUNT;
+    private static final double TOTAL_AMOUNT = MONTHLY_PAYMENT * NUMBER_OF_MONTH;
+    private static final double TOTAL_OVERPAYMENT = TOTAL_AMOUNT - CREDIT_AMOUNT;
 
     @Test
     void monthlyPayment() {
         System.out.println(String.format(Locale.getDefault(), "Сумма ауитентного платежа %,.2f в месяц %n", MONTHLY_PAYMENT));
         assertEquals(MONTHLY_PAYMENT, CREDIT_CALCULATOR.monthlyPayment(
-                        CREDIT_AMOUNT, NUMBER_OF_MONTH, PERCENTAGE_MONTH_RATE
+                        CREDIT_AMOUNT, NUMBER_OF_MONTH, PERCENTAGE_YEAR_RATE
                 )
         );
     }
@@ -40,7 +40,7 @@ class AnnuityCreditCalculatorTest {
     @Test
     void overpaymentForPeriod() {
         System.out.println(String.format(Locale.getDefault(), "Начисленные проценты %,.2f за весь период %n", TOTAL_OVERPAYMENT));
-        assertEquals(TOTAL_AMOUNT, CREDIT_CALCULATOR.overpayment(
+        assertEquals(TOTAL_OVERPAYMENT, CREDIT_CALCULATOR.overpayment(
                 CREDIT_AMOUNT, NUMBER_OF_MONTH, PERCENTAGE_YEAR_RATE)
         );
     }
